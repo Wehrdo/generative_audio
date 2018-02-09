@@ -54,14 +54,14 @@ src = """
 """
 
 # for note in full_pent:
-for char in src:
-    # note = full_pent[ord(char)]
-    note = ord(char)
+for char in "Die! Die! I hate the world!!!!!!!!!! Die!!!!!!!!":
+    note = full_pent[ord(char) % len(full_pent)]
+    # note = ord(char)
     note_on = [0x90, note, 127]
     note_off = [0x80, note, 0]
     midiout.send_message(note_on)
-    time.sleep(0.25)
+    time.sleep(0.15)
     midiout.send_message(note_off)
-    time.sleep(0.01)
+    time.sleep(0.005)
 
 del midiout
