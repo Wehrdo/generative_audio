@@ -7,7 +7,7 @@ available_ports = midiout.get_ports()
 
 
 if available_ports:
-    synth_port = [i for i, name in enumerate(available_ports) if "FLUID" in name][0]
+    synth_port = [i for i, name in enumerate(available_ports) if "loop" in name][0]
     midiout.open_port(synth_port)
 else:
     midiout.open_virtual_port("virt_port")
@@ -23,7 +23,7 @@ def expand_scale(scale, octaves):
             expanded.append((i*12) + note)
     return expanded
 
-full_pent = expand_scale(pentatonic, range(3, 6))
+full_pent = expand_scale(pentatonic, range(5, 7))
 
 src = """
 // SPDX-License-Identifier: GPL-2.0
@@ -60,8 +60,8 @@ for char in "Die! Die! I hate the world!!!!!!!!!! Die!!!!!!!!":
     note_on = [0x90, note, 127]
     note_off = [0x80, note, 0]
     midiout.send_message(note_on)
-    time.sleep(0.15)
+    time.sleep(0.2)
     midiout.send_message(note_off)
-    time.sleep(0.005)
+    time.sleep(0.05)
 
 del midiout
